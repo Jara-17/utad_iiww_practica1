@@ -1,0 +1,61 @@
+---
+import Gallery from "../components/Gallery.astro";
+import Hero from "../components/Hero.astro";
+import Products from "../components/Products.astro";
+import Layout from "../layouts/Layout.astro";
+
+type Product = {
+  src: string;
+  name: string;
+  price: string;
+};
+
+const products: Product[] = [
+  { src: "img/pan1.jpg", name: "Pan", price: "2.50€" },
+  { src: "img/pan2.jpg", name: "Cesta de Panes", price: "10.80€" },
+  { src: "img/pan3.jpg", name: "Pan Integral", price: "3.20€" },
+  { src: "img/pan4.jpg", name: "Pan de Molde", price: "2.00€" },
+  { src: "img/pan5.jpg", name: "Pan de Chocolate", price: "2.80€" },
+  { src: "img/pan6.jpg", name: "Panes Integrales", price: "20.00€" },
+];
+
+type ProductsAvailable = {
+  image: string;
+  name: string;
+  description: string;
+  available: boolean;
+  price: number;
+};
+
+const productsAvailable: ProductsAvailable[] = [
+  {
+    image: "/img/pan3.jpg",
+    name: "Pan Integral",
+    description: "Delicioso pan integral hecho con los mejores ingredientes.",
+    available: true,
+    price: 2.99,
+  },
+  {
+    image: "/img/pan4.jpg",
+    name: "Pan de Chocolate",
+    description: "Perfecto para los amantes del chocolate.",
+    available: true,
+    price: 3.49,
+  },
+  {
+    image: "/img/pan1.jpg",
+    name: "Pan Francés",
+    description: "Crujiente por fuera y suave por dentro.",
+    available: true,
+    price: 1.99,
+  },
+];
+---
+
+<Layout title="Panaderia">
+  <Hero />
+  <Gallery products={products} title="Productos Destacados del Día" />
+  <Products products={productsAvailable} title="Productos Disponibles" />
+</Layout>
+
+<style></style>

@@ -1,0 +1,145 @@
+---
+interface ProductProps {
+  image: string;
+  name: string;
+  description: string;
+  available: boolean;
+  price: number;
+  onAddToCart: () => void;
+}
+
+const { image, name, description, available, price, onAddToCart } = Astro.props;
+---
+
+<div class="product-card">
+  <img src={image} alt={name} class="product-card__image" />
+
+  <div class="product-card__info">
+    <h3 class="product-card__name">{name}</h3>
+    <p class="product-card__description">{description}</p>
+
+    <div class="product-card__details">
+      <span
+        class={`product-card__availability ${available ? "product-card__availability--available" : "product-card__availability--unavailable"}`}
+      >
+        {available ? "Disponible" : "No disponible"}
+      </span>
+      <span class="product-card__price">{price.toFixed(2)}€</span>
+    </div>
+
+    <button
+      class="product-card__button"
+      onclick={onAddToCart}
+      disabled={!available}
+    >
+      {available ? "Agregar al carrito" : "No disponible"}
+    </button>
+  </div>
+</div>
+
+<style>
+  /* Bloque principal: product-card */
+  .product-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    width: 24rem;
+    background-color: #181827;
+    border-radius: 12px;
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+    padding: 1.5rem;
+    margin: 1.5rem;
+    transition:
+      transform 0.3s ease,
+      box-shadow 0.3s ease;
+  }
+
+  .product-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 10px 14px rgba(0, 0, 0, 0.25);
+  }
+
+  /* Elemento: imagen */
+  .product-card__image {
+    width: 100%;
+    height: 14rem;
+    object-fit: cover;
+    border-radius: 12px;
+  }
+
+  /* Elemento: información */
+  .product-card__info {
+    text-align: center;
+    margin-top: 1.5rem;
+    width: 100%;
+  }
+
+  .product-card__name {
+    font-size: 1.8rem;
+    font-weight: bold;
+    margin: 0.8rem 0;
+    color: #dab892;
+  }
+
+  .product-card__description {
+    font-size: 1.2rem;
+    color: #f3e9dc;
+    margin-bottom: 1.5rem;
+  }
+
+  /* Elemento: detalles */
+  .product-card__details {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+  }
+
+  /* Elemento: disponibilidad */
+  .product-card__availability {
+    font-size: 1rem;
+    font-weight: bold;
+    border-radius: 6px;
+    padding: 0.3rem 0.6rem;
+  }
+
+  .product-card__availability--available {
+    color: #28a745;
+    background-color: #d4edda;
+  }
+
+  .product-card__availability--unavailable {
+    color: #dc3545;
+    background-color: #f8d7da;
+  }
+
+  /* Elemento: precio */
+  .product-card__price {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #f3e9dc;
+  }
+
+  /* Elemento: botón */
+  .product-card__button {
+    background-color: #aa7131;
+    color: #f3e9dc;
+    font-size: 1.2rem;
+    font-weight: bold;
+    border: none;
+    border-radius: 6px;
+    padding: 0.8rem 1.5rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  .product-card__button:hover {
+    background-color: #b26105;
+  }
+
+  .product-card__button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
+</style>

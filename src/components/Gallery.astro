@@ -1,0 +1,102 @@
+---
+type Product = { src: string; name: string; price: string };
+
+interface GalleryProps {
+  title: string;
+  products: Product[];
+}
+
+const { title, products } = Astro.props;
+---
+
+<section class="gallery-container">
+  <h2 class="gallery-title">{title}</h2>
+
+  <div class="gallery">
+    {
+      products.map((product: Product) => (
+        <div class="gallery__item">
+          <img
+            class="gallery__image"
+            src={product.src}
+            alt={`Imagen de ${product.name}`}
+          />
+          <div class="gallery__info">
+            <p class="gallery__name">{product.name}</p>
+            <p class="gallery__price">{product.price}</p>
+          </div>
+        </div>
+      ))
+    }
+  </div>
+</section>
+
+<style>
+  .gallery-container {
+    width: 100%;
+    padding: 2rem;
+    color: #f3e9dc;
+  }
+
+  .gallery-title {
+    font-size: 3rem;
+    font-weight: bold;
+    margin: 2rem 0;
+    text-align: center;
+    color: #dab892;
+  }
+
+  .gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 1rem;
+    justify-items: center;
+    align-items: center;
+  }
+
+  .gallery__item {
+    position: relative;
+    width: 100%;
+    max-width: 500px;
+    overflow: hidden;
+    border-radius: 8px;
+  }
+
+  .gallery__image {
+    width: 100%;
+    height: auto;
+    transition: transform 0.3s ease;
+  }
+
+  .gallery__image:hover {
+    transform: scale(1.05);
+  }
+
+  .gallery__info {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.6); /* Fondo negro transparente */
+    color: #f3e9dc;
+    padding: 1rem;
+    text-align: center;
+    opacity: 0; /* Oculto por defecto */
+    transition: opacity 0.3s ease; /* Transición suave */
+  }
+
+  .gallery__item:hover .gallery__info {
+    opacity: 1; /* Muestra la información al pasar el mouse */
+  }
+
+  .gallery__name {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin: 0;
+  }
+
+  .gallery__price {
+    font-size: 1.2rem;
+    margin: 0.5rem 0 0;
+  }
+</style>

@@ -1,0 +1,86 @@
+<section class="hero">
+  <div class="hero__image-container">
+    <img class="hero__image" src="/img/pan1-mediano.jpg" alt="Imagen del Pan" />
+  </div>
+
+  <div class="hero__text-container">
+    <h2 class="hero__title">El Mejor Pan Para Tí</h2>
+    <p class="hero__description">
+      Disfruta del aroma y sabor de nuestros panes artesanales, hechos con
+      dedicación y los mejores ingredientes. ¡Perfectos para cualquier ocasión!
+    </p>
+  </div>
+</section>
+
+<style>
+  .hero {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 2rem;
+    padding: 4rem 2rem;
+  }
+
+  .hero__image-container {
+    flex: 1;
+    min-width: 300px;
+    max-width: 50%;
+    border-radius: 1.5rem;
+    overflow: hidden;
+  }
+
+  .hero__image {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+  }
+
+  .hero__image:hover {
+    transform: scale(1.05);
+  }
+
+  .hero__text-container {
+    flex: 1;
+    min-width: 300px;
+    color: #f3e9dc;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .hero__title {
+    font-size: 2.8rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+    line-height: 1.2;
+    color: #dab892;
+  }
+
+  .hero__description {
+    font-size: 1.2rem;
+    line-height: 1.6;
+    color: #f3e9dc;
+  }
+
+  @media (max-width: 768px) {
+    .hero {
+      flex-direction: column-reverse;
+      padding: 2rem 1rem;
+    }
+
+    .hero__text-container {
+      text-align: center;
+    }
+
+    .hero__title {
+      font-size: 2.2rem;
+    }
+
+    .hero__description {
+      font-size: 1rem;
+    }
+  }
+</style>

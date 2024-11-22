@@ -1,0 +1,82 @@
+---
+import Form from "../components/Form.astro";
+import AuthLayout from "../layouts/AuthLayout.astro";
+
+type FormField = {
+  label: string;
+  type: astroHTML.JSX.HTMLInputTypeAttribute;
+  name: string;
+  placeholder: string;
+};
+
+const fields: FormField[] = [
+  {
+    label: "Nombre Completo",
+    type: "text",
+    placeholder: "Ingrese su nombre y sus apellidos",
+    name: "fullName",
+  },
+  {
+    label: "Username",
+    type: "text",
+    placeholder: "Ingrese su nombre de usuario único",
+    name: "username",
+  },
+  {
+    label: "Email",
+    type: "email",
+    placeholder: "Ingrese su email Ej: correo@correo.com",
+    name: "email",
+  },
+  {
+    label: "Password",
+    type: "password",
+    placeholder: "Ingrese una contraseña",
+    name: "password",
+  },
+  {
+    label: "Repetir Password",
+    type: "password",
+    placeholder: "Repita la contraseña",
+    name: "password",
+  },
+];
+
+const onSubmit = () => {
+  console.log("Usuario Creado");
+};
+---
+
+<AuthLayout title="Registro">
+  <main>
+    <Form
+      title="Registro"
+      fields={fields}
+      buttonText="Registrar"
+      onSubmit={onSubmit}
+    />
+    <p>¿Ya tienes cuenta? <a href="/login">Iniciar Sesión</a></p>
+  </main>
+</AuthLayout>
+
+<style>
+  main {
+    width: 100%;
+    padding: 6rem;
+  }
+
+  p {
+    color: white;
+    font-size: 1.5rem;
+    text-align: center;
+  }
+  a {
+    color: white;
+    font-size: 1.5rem;
+    text-decoration: none;
+    transition: color 0.3s ease-in-out;
+  }
+  a:hover {
+    color: #dab892;
+  }
+</style>

@@ -1,0 +1,63 @@
+---
+import Products from "../components/Products.astro";
+import Layout from "../layouts/Layout.astro";
+
+type Product = {
+  image: string;
+  name: string;
+  description: string;
+  available: boolean;
+  price: number;
+};
+
+const products: Product[] = [
+  {
+    image: "/img/pan3.jpg",
+    name: "Pan Integral",
+    description: "Delicioso pan integral hecho con los mejores ingredientes.",
+    available: true,
+    price: 2.99,
+  },
+  {
+    image: "/img/pan4.jpg",
+    name: "Pan de Chocolate",
+    description: "Perfecto para los amantes del chocolate.",
+    available: true,
+    price: 3.49,
+  },
+  {
+    image: "/img/pan1.jpg",
+    name: "Pan Francés",
+    description: "Crujiente por fuera y suave por dentro.",
+    available: true,
+    price: 1.99,
+  },
+  {
+    image: "/img/pan2.jpg",
+    name: "Cesta de Panes",
+    description: "Deliciosos panes hechos con los mejores ingredientes.",
+    available: false,
+    price: 20,
+  },
+  {
+    image: "/img/pan5.jpg",
+    name: "Pan de Centeno",
+    description: "Perfecto para acompañarlo con una buena tasa de café.",
+    available: true,
+    price: 3.49,
+  },
+  {
+    image: "/img/pan6.jpg",
+    name: "Pan",
+    description: "El mejor pan del mundo entero.",
+    available: false,
+    price: 1009.99,
+  },
+];
+---
+
+<Layout title="Tienda">
+  <Products title="Tienda" products={products} />
+</Layout>
+
+<style></style>

@@ -1,0 +1,60 @@
+---
+// ProductList.astro
+import Card from "./Card.astro";
+
+interface Product {
+  image: string;
+  name: string;
+  description: string;
+  available: boolean;
+  price: number;
+  onAddToCart: (productName: string) => void;
+}
+
+interface ProductListProps {
+  title: string;
+  products: Product[];
+}
+
+const { title, products } = Astro.props;
+---
+
+<section class="product-list">
+  <h2 class="product-list__title">{title}</h2>
+
+  <div class="product-list__grid">
+    {
+      products.map((product: Product) => (
+        <Card
+          image={product.image}
+          name={product.name}
+          description={product.description}
+          available={product.available}
+          price={product.price}
+          onAddToCart={() => product.onAddToCart(product.name)}
+        />
+      ))
+    }
+  </div>
+</section>
+
+<style>
+  .product-list {
+    padding: 2rem;
+  }
+
+  .product-list__title {
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-bottom: 2rem;
+    text-align: center;
+    color: #dab892;
+  }
+
+  .product-list__grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2rem;
+  }
+</style>

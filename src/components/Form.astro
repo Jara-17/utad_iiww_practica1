@@ -1,0 +1,114 @@
+---
+type FormField = {
+  label: string;
+  type: astroHTML.JSX.HTMLInputTypeAttribute;
+  name: string;
+  placeholder: string;
+};
+
+interface FormProps {
+  title: string;
+  fields: FormField[];
+  buttonText: string;
+  onSubmit: (e: Event) => void;
+}
+
+const { title, fields, buttonText, onSubmit } = Astro.props;
+---
+
+<section class="form-container">
+  <h2 class="form__title">{title}</h2>
+
+  <form class="form" onsubmit={onSubmit}>
+    {
+      Array.isArray(fields) &&
+        fields.map((field: FormField) => (
+          <div class="form__group">
+            <label for={field.name} class="form__label">
+              {field.label}
+            </label>
+            <input
+              type={field.type}
+              id={field.name}
+              name={field.name}
+              placeholder={field.placeholder}
+              class="form__input"
+              required
+            />
+          </div>
+        ))
+    }
+
+    <button type="submit" class="form__button">{buttonText}</button>
+  </form>
+</section>
+
+<style>
+  .form-container {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 2rem;
+    background-color: #181827;
+    border: 1px solid #4284ca;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+
+  .form__title {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #dab892;
+    text-align: center;
+    margin-bottom: 1.5rem;
+  }
+
+  .form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .form__group {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .form__label {
+    font-size: 1rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+    color: #dab892;
+  }
+
+  .form__input {
+    padding: 0.75rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 1rem;
+    color: #333;
+    background-color: #f9f9f9;
+  }
+
+  .form__input:focus {
+    border-color: #dab892;
+    outline: none;
+    background-color: #fff;
+  }
+
+  .form__button {
+    background-color: #dab892;
+    color: #774f05;
+    border: none;
+    padding: 0.75rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    transition: all 0.3s ease-in-out;
+  }
+
+  .form__button:hover {
+    background-color: #b8936b;
+  }
+</style>

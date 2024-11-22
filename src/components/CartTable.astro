@@ -1,0 +1,219 @@
+---
+const cartItems = [
+  {
+    image: "/img/pan1.jpg",
+    name: "Pan Francés",
+    description: "Crujiente por fuera y suave por dentro.",
+    price: 1.99,
+    quantity: 2,
+    subtotal: 3.98,
+  },
+  {
+    image: "/img/pan4.jpg",
+    name: "Pan de Chocolate",
+    description: "Perfecto para los amantes del chocolate.",
+    price: 3.49,
+    quantity: 1,
+    subtotal: 3.49,
+  },
+];
+const total = cartItems.reduce((sum, item) => sum + item.subtotal, 0);
+---
+
+<section class="container">
+  <h2 class="title">Carro de Compras</h2>
+  {
+    cartItems.length > 0 ? (
+      <table class="cart-table">
+        <thead>
+          <tr class="cart-table__header">
+            <th>Imagen</th>
+            <th>Nombre</th>
+            <th>Descripción</th>
+            <th>Precio</th>
+            <th>Cantidad</th>
+            <th>Subtotal</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          {cartItems.map((item) => (
+            <tr class="cart-table__row">
+              <td>
+                <img
+                  src={item.image}
+                  alt={item.name}
+                  class="cart-table__image"
+                />
+              </td>
+              <td>{item.name}</td>
+              <td>{item.description}</td>
+              <td>{item.price.toFixed(2)} €</td>
+              <td>
+                <div class="cart-table__quantity">
+                  <button class="cart-table__btn cart-table__btn--decrement">
+                    -
+                  </button>
+                  <span>{item.quantity}</span>
+                  <button class="cart-table__btn cart-table__btn--increment">
+                    +
+                  </button>
+                </div>
+              </td>
+              <td>{item.subtotal.toFixed(2)} €</td>
+              <td>
+                <button class="cart-table__action cart-table__action--buy">
+                  Comprar
+                </button>
+                <button class="cart-table__action cart-table__action--remove">
+                  Eliminar
+                </button>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+
+        <tfoot>
+          <tr class="cart-table__footer">
+            <td colspan="5" class="cart-table__total-label">
+              Total:
+            </td>
+            <td class="cart-table__total">{total.toFixed(2)} €</td>
+            <td>
+              <button class="cart-table__action cart-table__action--checkout pay">
+                Pagar
+              </button>
+            </td>
+          </tr>
+        </tfoot>
+      </table>
+    ) : (
+      <h2 class="cart-empty-message">No Hay Productos de Momento</h2>
+    )
+  }
+</section>
+
+<style>
+  .container {
+    margin: 2rem;
+    background-color: #181827;
+    border-radius: 1.5rem;
+    overflow: hidden;
+  }
+
+  .title {
+    font-size: 3rem;
+    font-weight: bold;
+    margin: 2rem 0;
+    text-align: center;
+    color: #dab892;
+  }
+
+  .cart-empty-message {
+    text-align: center;
+    font-size: 1.5rem;
+    color: white;
+  }
+
+  .cart-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 2rem auto;
+    font-family: Arial, sans-serif;
+    background-color: #181827;
+
+    color: #fff9f3;
+  }
+
+  .cart-table__header th {
+    background-color: #181827;
+    color: white;
+    font-weight: bold;
+    padding: 1rem;
+    text-align: center;
+  }
+
+  .cart-table__row {
+    border-bottom: 1px solid #ddd;
+  }
+
+  .cart-table__row td {
+    padding: 1rem;
+    text-align: center;
+  }
+
+  .cart-table__image {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 8px;
+  }
+
+  .cart-table__quantity {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+  }
+
+  .cart-table__btn {
+    background-color: #8e581a;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: bold;
+  }
+
+  .cart-table__btn--decrement:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
+
+  .cart-table__action {
+    background-color: #6c757d;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1rem;
+  }
+
+  .cart-table__action--buy {
+    background-color: #28a745;
+  }
+
+  .cart-table__action--remove {
+    background-color: #dc3545;
+  }
+
+  .cart-table__action--checkout {
+    background-color: #007bff;
+  }
+
+  .pay {
+    width: 100%;
+    padding: 0.5rem;
+  }
+
+  .cart-table__total-label {
+    font-weight: bold;
+    text-align: right;
+    font-size: 2rem;
+  }
+
+  .cart-table__total {
+    font-weight: bold;
+    font-size: 1.25rem;
+    color: #fff9f3;
+  }
+
+  .cart-table__footer td {
+    padding: 1rem;
+    text-align: left;
+  }
+</style>
